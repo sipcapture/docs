@@ -4,6 +4,8 @@ HOMER features dedicated _HEP Agents_ designed for platforms _without native HEP
 <!-- tabs:start -->
 
 ## ** HEPlify **
+<a id=heplify></a>
+
 * [HEPlify](https://github.com/sipcapture/heplify): CA developed in go, portable, near zero configuration
 
 ### Installation
@@ -151,6 +153,8 @@ The following parameters are available to configure your agent
 
 
 ## ** CaptAgent **
+<a id=captagent></a>
+
 * [CaptAgent](https://github.com/sipcapture/captagent): CA developed in C, ideal for complex configurations
   
 ### Installation
