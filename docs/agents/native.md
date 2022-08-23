@@ -188,11 +188,265 @@ Finally, use 'sip_trace' in your route {} logic where needed:
 
 ## ** Freeswitch **
 
+![FreeSwitch](http://i.imgur.com/gylbBjz.png)
+## FreeSWITCH Capture Agent
+
+Freeswitch ships with an integrated HEP Capture Agent designed to work with HOMER
+
+**FreeSwitch HEP3/EEP support is available in 1.6.8+ **
+
+### Global Configuration
+To enable HEP capturing, open sofia.conf.xml and set capture-server param
+
+```
+<param name="capture-server" value="udp:192.168.0.1:9060"/>
+```
+
+Freeswitch >= 1.7 has support for HEPv2 and HEPv3. The new syntax is:
+
+```
+<param name="capture-server" value="udp:192.168.0.1:9060;hep=3;capture_id=100"/>
+```
+open internal.xml and external.xml and change sip-capture param to "yes". Also please do it on each profile in your sip_profiles/internal and sip_profiles/external (/etc/freeswitch/sip_profiles)
+
+```
+<param name="sip-capture" value="yes"/>
+```
+*note: the ip address and port must be same as the listen param in your kamailio.cfg or in heplify-server *
+
+----
+
+To enable/disable the HEP agent on demand, you can use CLI commands:
+```
+freeswitch@fsnode04> sofia global capture on
+ 
++OK Global capture on
+freeswitch@fsnode04> sofia global capture off
+ 
++OK Global capture off
+```
+
+### Profile Configuration
+
+You can choose to activate HEP capturing only for a specific profile:
+```
+freeswitch@fsnode04> sofia profile internal capture on
+ 
+Enabled sip capturing on internal
+
+freeswitch@fsnode04> sofia profile internal capture off
+ 
+Disabled sip capturing on internal
+``` 
+
+### B2BUA Correlation
+To correlate B2BUA legs set the following before bridging the second leg:
+```
+      <action application="set" data="sip_h_X-cid=${sip_call_id}"/>
+```
+
+Next, configure `heplify-server` to extract correlation from the newly created `X-cid` header _(TODO: link)_
+
+### ESL Integration (beta)
+
+[hepipe.js](https://github.com/sipcapture/hepipe.js/blob/master/esl) provides **experimental** support for FreeSWITCH ESL integration for call quality reports feeding to HOMER 5, effectively providing external HEP3/EEP features with correlation support.
+
+#### Events
+
+| ESL Event  | Hep Mode | HEP Type  |
+|:--|:--|:--|
+| CHANNEL_CREATE | LOG | 100 |
+| CHANNEL_ANSWER | LOG | 100 |
+| CHANNEL_DESTROY | LOG | 100 | 
+| CUSTOM | LOG | 100 | 
+| RECV_RTCP_MESSAGE | RTCP | 5 | 
+| CHANNEL_DESTROY | CUSTOM QoS | 99 |
+
+For full instructions and details please checkout [hepipe.js](https://github.com/sipcapture/hepipe.js/blob/master/esl)
+
+If you test or extend this feature please share your feedback!
+
+
 ## ** Asterisk **
+
+# ![](http://www.asterisk.org/sites/asterisk/themes/asterisk/logo.png)
+
+
+Asterisk 12+ ships with HEP encapsulation support (res_hep) and is able to natively mirror its packets to a HEP/EEP Collector such as HOMER. When using ```chan_pjsip``` enabling HEP features is as simple as configuring ```/etc/asterisk/hep.conf```
+
+### Requirements
+
+* loading ```res_hep_pjsip.so``` module
+
+### Example Configuration:
+<pre>
+/etc/asterisk/hep.conf
+
+;
+; res_hep Module configuration for Asterisk
+;
+
+; All settings are currently set in the general section.
+[general]
+<b>enabled = yes </b>
+; Enable/disable forwarding of packets to a
+; HEP server. Default is "yes".
+<b>capture_address = 10.0.0.1:9060 </b>
+; The address of the HEP capture server.
+<b>capture_password = foo </b>
+; If specified, the authorization passsword
+; for the HEP server. If not specified, no
+; authorization password will be sent.
+<b>capture_id = 1234 </b>
+; A unique integer identifier for this
+; server. This ID will be embedded sent
+; with each packet from this server.
+</pre>
+
+Once configured and enabled, the module will begin forwarding all handled SIP packets to HOMER for handling.
+
+
+----------
+
+# RTCP statistics
+
+Asterisk 12+ ships with _res_hep_rtcp_. The module subscribes to Stasis and receives RTCP information back from the message bus, which it encodes into HEPv3 packets and sends to the res_hep module for transmission. Using this module, someone with a Homer server can get live call quality monitoring for all channels in their Asterisk 12+ systems.
+
+## Enable
+To enable the functionality, just load the module alongside the [[res_hep|Examples:-Asterisk]] module
+
+------------
+
+The module supports sender (SR) and receiver (RR) reports:
+
+* rtcp-sender: Audio is streamed from the first instance and echo'd back from the second to the first. This results in RTCP information from both instances being sent to a HEP server, where both sides are 'senders' and thus generate/receive SR packets.
+* rtcp-receiver: Audio is streamed from the first instance and absorbed by the second. This results in RTCP information from both instances being sent to a HEP server, where the first transmits SR packets and received RR packets and the second transmits RR packets and received SR packets.
+
+
+-------------
+
+# PJSIP X-CID Correlation for BLEG
+```
+PJSIP_HEADER(add,X-CID)=$SIPCALLID
+```
+
+# CDR Correlation Example
+
+##### /etc/asterisk/extensions.conf
+```
+exten => s,1,Set(CDR(callid)=${SIPCALLID})
+exten => s,2,Set(CDR(rtcpinfo)=${RTPAUDIOQOS})
+```
+
+##### /etc/asterisk/cdr_custom.conf
+```
+[mappings]
+Master.csv => ${CSV_QUOTE(${CDR(clid)})},${CSV_QUOTE(${CDR(src)})},${CSV_QUOTE(${CDR(dst)})},${CSV_QUOTE(${CDR(dcontext)})},${CSV_QUOTE(${CDR(channel)})},${CSV_QUOTE(${CDR(dstchannel)})},${CSV_QUOTE(${CDR(lastapp)})},${CSV_QUOTE(${CDR(lastdata)})},${CSV_QUOTE(${CDR(start)})},${CSV_QUOTE(${CDR(answer)})},${CSV_QUOTE(${CDR(end)})},${CSV_QUOTE(${CDR(duration)})},${CSV_QUOTE(${CDR(billsec)})},${CSV_QUOTE(${CDR(disposition)})},${CSV_QUOTE(${CDR(amaflags)})},${CSV_QUOTE(${CDR(accountcode)})},${CSV_QUOTE(${CDR(uniqueid)})},${CSV_QUOTE(${CDR(userfield)})},${CDR(sequence)},${CDR(callid)},${CDR(rtcpinfo)}
+```
 
 ## ** RTP:Engine **
 
+![](https://www.sipwise.com/wp-content/themes/sipwise/assets/images/logo.svg) 
+
+RTPEngine
+=======================
+
+The [Sipwise](http://www.sipwise.com/) NGCP rtpengine is a proxy for RTP traffic and other UDP based
+media traffic. It's meant to be used with the [Kamailio SIP proxy](http://www.kamailio.org/) and [OpenSIPS SIP proxy](http://www.opensips.org/) and forms a drop-in replacement for any of the other available RTP and media proxies.
+
+RTPEngine mr4.4.1+ supports [HEP3](http://hep.sipcapture.org) Encapsulation and can mirror RTCP packets relayed between streams to **HOMER** complete with SIP correlation Call-IDs from the respective signaling session. 
+
+#### NGCP Users
+Users of the NGCP platform should enable HOMER support directly in their ```config.yml``` replacing the destination parameter with the correct HOMER HEP socket and applying with ```ngcpcfg apply```
+```
+...
+homer_rtcp_stats:
+    destination: 10.20.30.40:9070
+    enabled: yes
+    id: '2001'
+    protocol: udp
+...
+```
+
+
+##### Parameters
+```
+ --homer=IP46:PORT           Address of Homer server for RTCP stats
+ --homer-protocol=udp|tcp    Transport protocol for Homer (must be defined)
+ --homer-id=INT              'Capture ID' to use within the HEP protocol
+```
+
+### Setup
+Configure RTPEngine to send RTCP reports to Homer using the same HEP settings you used in your Kamailio/OpenSIPS/Captagent configuration to achieve SIP session correlation:
+
+![](http://i.imgur.com/cWB7eWh.png)
+
+##### Example HEP Settings (command line)
+```
+ --homer=10.0.0.20:9060 
+ --homer-protocol=udp  
+ --homer-id=999 
+```
+
+```
+/usr/sbin/rtpengine --interface=10.0.0.1 --listen-tcp=25060 \
+--listen-udp=12222 --listen-ng=22222 --listen-cli=9900 --timeout=60 \
+--silent-timeout=3600 --pidfile=/var/run/ngcp-rtpengine-daemon.pid \
+--table=0 --log-level=6 --log-facility=daemon --homer=10.0.0.20:9060 \
+--homer-id=999 --homer-protocol=udp
+```
+
+##### Example HEP Settings (rtpengine.default)
+```
+HOMER=10.0.0.20:9060
+HOMER_PROTOCOL=udp
+HOMER_ID=2099
+```
+
+##### Example RTCP Report
+```
+{"sender_information":
+{"ntp_timestamp_sec":3667834977,"ntp_timestamp_usec":2355549043,
+"octets":82240,"rtp_timestamp":84679,"packets":514},
+"ssrc":3724882677,"type":200,"report_count":1,"report_blocks":
+[{"source_ssrc":2062957521,"highest_seq_no":4663,"fraction_lost":0,
+"ia_jitter":13,"packets_lost":0,"lsr":3093100159,"dlsr":296222}],
+"sdes_ssrc":3724882677,"sdes_report_count":1,"sdes_information": [] }
+```
+
+##### Example QoS Report
+
+![](https://camo.githubusercontent.com/6394f82d5a0511085f4f6980e2b31ca6fe334e38/687474703a2f2f692e696d6775722e636f6d2f38784b62513837672e706e67)
+
+
+
 ## ** RTPProxy **
+
+<img src="https://opengraph.githubassets.com/96bbc25bfaf9f9c4228742862d8d672f90113dc54d064cfbc593e4154b393a21/sippy/rtpproxy" width=600 />
+
+### HEP Support
+[RTPProxy](https://www.rtpproxy.org/) can natively send HEP RTCP Reports _(HEP type 5)_ for relayed RTP/RTCP streams
+
+### Module Configuration Parameters:
+Create _(or extend)_ the optional configuration file containing the required settings:
+```
+modules {
+   rtpp_acct_rtcp_hep {
+       load = ../modules/acct_rtcp_hep/.libs/rtpp_acct_rtcp_hep.so
+       capt_host  = HEP_SERVER_IP
+       capt_port  = 9060
+       capt_ptype = udp
+       capt_id = 101
+   }
+}
+```
+
+Include the saved configuration in your RTPProxy arguments using the config parameter:
+```
+RTPPROXY_ARGS="--config path/to/rtpp_acct_rtcp_hep.conf"
+```
+
+Further examples can be found in the [RTPProxy test coverage](https://github.com/sippy/rtpproxy/blob/master/tests/acct_rtcp_hep/basic.conf)
 
 <!-- tabs:end -->
 
