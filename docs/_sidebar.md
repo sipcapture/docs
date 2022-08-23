@@ -4,6 +4,6 @@
   </a>
 </p>
 
-* [Homer](/)
-* ** Get Started **
-   * [Install](install.md)
+* [Homer](/?id=start)
+* **Overview**
+  * [Installation](install.md "HOMER VoIP & RTC Monitoring")
