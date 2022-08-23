@@ -6,4 +6,7 @@
 
 * [Homer](/?id=start)
 * **Overview**
+  * [About](about.md)
   * [Installation](install.md "HOMER VoIP & RTC Monitoring")
+* [Support](support.md)
+
