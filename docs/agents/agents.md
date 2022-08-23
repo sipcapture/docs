@@ -1,6 +1,9 @@
 # __HEP__ Agents
 Ready to ship data to Homer? Install a HEP Capture Agent based on your needs and preferences 📞 
 
+_Found an problem with this guide? Please open an [issue](https://github.com/sipcapture/homer/issues) and help us improve!_
+
+
 ### **Dedicated Agents**
 
 HOMER features dedicated _HEP Agents_ designed for platforms _without native HEP support._
