@@ -1,7 +1,7 @@
 <p id=start align="center"></p>
 
 # HOMER
-#### 100% Open-Source VoIP & RTC Capture, Troubleshooting & Monitoring
+_100% Open-Source VoIP & RTC Capture, Troubleshooting & Monitoring_
 
 
 <img src="https://user-images.githubusercontent.com/1423657/73536888-5513dd80-4427-11ea-82aa-b2ce53192a63.png"/>
