@@ -9,8 +9,8 @@
 * **Installation**
   * [HEP Server](install.md "HOMER VoIP & RTC Monitoring")
   * [HEP Agents](agents/agents.md "HOMER VoIP & RTC Monitoring")
-    * [Dedicated](agents/dedicated.md "HOMER VoIP & RTC Monitoring")
-    * [Native](agents/native.md "HOMER VoIP & RTC Monitoring")
-    * [Event](agents/event.md "HOMER VoIP & RTC Monitoring")
+    * [Stand-Alone](agents/dedicated.md "HOMER VoIP & RTC Monitoring")
+    * [HEP Native](agents/native.md "HOMER VoIP & RTC Monitoring")
+    * [HEP Event](agents/event.md "HOMER VoIP & RTC Monitoring")
 * [Support](support.md)
 
