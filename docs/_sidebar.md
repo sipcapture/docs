@@ -5,8 +5,9 @@
 </p>
 
 * [Homer](/?id=start)
-* **Overview**
-  * [About](about.md)
-  * [Installation](install.md "HOMER VoIP & RTC Monitoring")
+* [About](about.md)
+* **Installation**
+  * [HEP Server](install.md "HOMER VoIP & RTC Monitoring")
+  * [HEP Agents](agents/agents.md "HOMER VoIP & RTC Monitoring")
 * [Support](support.md)
 
