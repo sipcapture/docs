@@ -348,9 +348,6 @@ Master.csv => ${CSV_QUOTE(${CDR(clid)})},${CSV_QUOTE(${CDR(src)})},${CSV_QUOTE($
 
 ![](https://www.sipwise.com/wp-content/themes/sipwise/assets/images/logo.svg) 
 
-RTPEngine
-=======================
-
 The [Sipwise](http://www.sipwise.com/) NGCP rtpengine is a proxy for RTP traffic and other UDP based
 media traffic. It's meant to be used with the [Kamailio SIP proxy](http://www.kamailio.org/) and [OpenSIPS SIP proxy](http://www.opensips.org/) and forms a drop-in replacement for any of the other available RTP and media proxies.
 
@@ -420,14 +417,14 @@ HOMER_ID=2099
 
 
 
-## ** RTPProxy **
+### ** RTPProxy **
 
 <img src="https://opengraph.githubassets.com/96bbc25bfaf9f9c4228742862d8d672f90113dc54d064cfbc593e4154b393a21/sippy/rtpproxy" width=600 />
 
-### HEP Support
+#### HEP Support
 [RTPProxy](https://www.rtpproxy.org/) can natively send HEP RTCP Reports _(HEP type 5)_ for relayed RTP/RTCP streams
 
-### Module Configuration Parameters:
+#### Module Configuration Parameters:
 Create _(or extend)_ the optional configuration file containing the required settings:
 ```
 modules {
