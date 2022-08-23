@@ -81,6 +81,111 @@ For further details and examples please consult the [OpenSIPS Documentation](htt
 
 ## ** Kamailio **
 
+![](http://kb.asipto.com/images/kamailio.jpg)
+
+### KAMAILIO HEP Tracing
+
+SIP capture functionalities are built into core kamailio. We have to only load required module, initialize it with the appropriate parameters and modify routing logic to use it. To keep the changes flexible and clean, this excample uses directives which allow us to simply switch on/off the additional functionality:
+
+##### kamailio.cfg
+First, define WITH_HOMER directive at the head of your script:
+```
+#!define WITH_HOMER
+```
+
+Next, move to the loadparam section of the script, and add a condition for siptrace:
+```
+#!ifdef WITH_HOMER
+loadmodule "siptrace.so"
+#!endif
+```
+
+_NOTE: siptrace module MUST be loaded after loading mysql and tm modules!_
+
+Next, configure the basic parameters for the module:
+```
+#!ifdef WITH_HOMER
+# check IP and port of your capture node
+modparam("siptrace", "duplicate_uri", "sip:10.0.0.1:9060")
+modparam("siptrace", "hep_mode_on", 1)
+modparam("siptrace", "trace_to_database", 0)
+modparam("siptrace", "trace_flag", 22)
+modparam("siptrace", "trace_on", 1)
+#!endif
+```
+
+
+Finally, use SIPTRACE in your ```route {}``` logic where needed:
+
+```
+#!ifdef WITH_HOMER
+        #start duplicate the SIP message now
+        sip_trace();
+        setflag(22);
+#!endif
+```
+
+### KAMAILIO 5.x Trace Node
+
+##### kamailio.cfg
+First, define WITH_HOMER directive at the head of your script:
+```
+#!define WITH_HOMER
+```
+
+Next, move to the loadparam section of the script, and add a condition for siptrace:
+```
+#!ifdef WITH_HOMER
+loadmodule "siptrace.so"
+#!endif
+```
+
+_NOTE: siptrace module MUST be loaded after loading mysql and tm modules!_
+
+Next, configure the basic parameters for the module:
+```
+#!ifdef WITH_HOMER
+# check IP and port of your capture node
+modparam("siptrace", "duplicate_uri", "sip:10.0.0.1:9060")
+# Send from an IP
+modparam("siptrace", "send_sock_addr", "sip:10.2.0.2:5000")
+modparam("siptrace", "hep_mode_on", 1)
+modparam("siptrace", "trace_to_database", 0)
+modparam("siptrace", "trace_flag", 22)
+modparam("siptrace", "trace_on", 1)
+#!endif
+```
+
+Finally, use 'sip_trace' in your route {} logic where needed:
+
+
+```
+#!ifdef WITH_HOMER
+        setflag(22);
+
+        #start duplication mode: m or M for message; t or T for transaction; d or D for dialog
+        sip_trace_mode("t");
+
+        #start duplicate the SIP message now 
+        sip_trace();
+
+        # Or you can use new syntax, if you want to have multipe copy of your data
+        sip_trace("sip:10.0.0.2:9060");
+
+        # send to 10.0.0.3 and assign a callid as correlation param
+        sip_trace("sip:10.0.0.3:9060", "$ci-abc");
+
+        # or by dialog: trace current dialog; needs to be done on initial INVITE and dialog has to be loaded
+        sip_trace("sip:10.0.0.4:9060", "$ci-abc", "d");
+          
+        #Send HEPLog:
+        hlog("$hdr(P-MyID)", "Another one with a custom correlation ID");
+  
+#!endif
+```
+
+
+
 ## ** Freeswitch **
 
 ## ** Asterisk **
