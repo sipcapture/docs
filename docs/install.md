@@ -4,7 +4,6 @@ This document provides guidance, packages and details to get HOMER installed & r
 
 _Found an problem with this guide? Please open an [issue](https://github.com/sipcapture/homer/issues) and help us improve!_
 
-<img src="https://camo.githubusercontent.com/0c29c4b70ff4b2958555ae30d3885eb4c34e5878/687474703a2f2f692e696d6775722e636f6d2f39414e303861752e676966"/>
 
 <!-- tabs:start -->
 
@@ -134,4 +133,6 @@ You should now be able to access your HOMER instance via HTTP on port `9080` and
 ![image](https://user-images.githubusercontent.com/1423657/73536888-5513dd80-4427-11ea-82aa-b2ce53192a63.png)
 
 <!-- tabs:end -->
+
+<img src="https://camo.githubusercontent.com/0c29c4b70ff4b2958555ae30d3885eb4c34e5878/687474703a2f2f692e696d6775722e636f6d2f39414e303861752e676966"/>
 
