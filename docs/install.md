@@ -1,16 +1,6 @@
 # __HOMER__ Setup
 This document provides guidance, packages and details to get HOMER installed & running
 
-### Server
-* 🎁 [Manual Install](#-manual-install) _(easy)_
-* 📑 [Quick Install](#-quick-install) _(easier)_
-* 🐋 [Docker Install](#-docker-install) _(easiest)_
-
-#### Clients & Integrations
-* 📞 [HEP Capture Agents](#-capture-agents)
-* 📈 [HEP Grafana Integration](#-grafana-integration)
-
-
 
 _Found an problem with this guide? Please open an [issue](https://github.com/sipcapture/homer/issues) and help us improve!_
 
@@ -44,9 +34,6 @@ chmod +x homer_installer.sh
 ./homer_installer.sh
 ```
 
-
-<img src="https://camo.githubusercontent.com/0c29c4b70ff4b2958555ae30d3885eb4c34e5878/687474703a2f2f692e696d6775722e636f6d2f39414e303861752e676966"/>
-
 ## ** 🐋 Docker **
 A set of `docker-compose` bundles is provided to bootstrap a full Homer 7.7 deployment including optional elements:
 [https://github.com/sipcapture/homer7-docker](https://github.com/sipcapture/homer7-docker/tree/7.7/heplify-server)
@@ -72,8 +59,6 @@ docker-compose up -d
 You should now be able to access your HOMER instance via HTTP on port `9080` and send HEPv3 traffic to port `9060/UDP` or `9061/TCP` _(note ports can be modified by the docker-compose configuration)_
 
 ![image](https://user-images.githubusercontent.com/1423657/73536888-5513dd80-4427-11ea-82aa-b2ce53192a63.png)
-
-<img src="https://camo.githubusercontent.com/0c29c4b70ff4b2958555ae30d3885eb4c34e5878/687474703a2f2f692e696d6775722e636f6d2f39414e303861752e676966"/>
 
 ## ** 🎁 Manual Install **
 Homer and its components can easily be installed manually in just minutes.
@@ -148,44 +133,5 @@ You should now be able to access your HOMER instance via HTTP on port `9080` and
 
 ![image](https://user-images.githubusercontent.com/1423657/73536888-5513dd80-4427-11ea-82aa-b2ce53192a63.png)
 
-<br>
-<img src="https://camo.githubusercontent.com/0c29c4b70ff4b2958555ae30d3885eb4c34e5878/687474703a2f2f692e696d6775722e636f6d2f39414e303861752e676966"/>
-
 <!-- tabs:end -->
 
-## 📞 Capture Agents
-Ready to ship data to Homer? Install a HEP Capture Agent based on your needs and preferences:
-* [HEPlify](https://github.com/sipcapture/heplify):
-  CA developed in go, portable, near zero configuration
-* [CaptAgent](https://github.com/sipcapture/captagent): 
-  CA developed in C, ideal for complex configurations
-  
-* **Native**:
-  [Native HEP Agents](https://github.com/sipcapture/homer/wiki) are available in [OpenSIPS](https://github.com/sipcapture/homer/wiki/Examples%3A-OpenSIPS), [Kamailio](https://github.com/sipcapture/homer/wiki/Examples%3A-Kamailio), [Asterisk](https://github.com/sipcapture/homer/wiki/Examples%3A-Asterisk), [Freeswitch](https://github.com/sipcapture/homer/wiki/Examples%3A-FreeSwitch), [RTP:Engine](https://github.com/sipcapture/homer/wiki/Examples%3A-RTPEngine) and many more. Consult the Wiki to get specific examples for your platform.
-
-* **Event Agents**:
-HOMER can collect, index and correlate non-packet events such as Logs, RTC stats, CDRs, and more using [HEP](https://github.com/sipcapture/hep) supported by a variety of tools such as [paStash](https://github.com/sipcapture/pastash/wiki) and [Telegraf](https://github.com/influxdata/telegraf/pull/6167)
-
-
-<img src="https://camo.githubusercontent.com/0c29c4b70ff4b2958555ae30d3885eb4c34e5878/687474703a2f2f692e696d6775722e636f6d2f39414e303861752e676966"/>
-
-## 📈 Grafana Integration
-Deploying HOMER alongside Grafana? 
-
-Import the [HOMER Preset Dashboards & Widgets](https://grafana.com/grafana/dashboards?direction=asc&orderBy=name&search=homer) to get started with standard KPIs in seconds.
-
-<img src="https://user-images.githubusercontent.com/20154956/39880524-57838c04-547e-11e8-8dec-262184192742.png">
-
-
-<img src="https://camo.githubusercontent.com/0c29c4b70ff4b2958555ae30d3885eb4c34e5878/687474703a2f2f692e696d6775722e636f6d2f39414e303861752e676966"/>
-
-
-Made with ❤️ by Humans
-
-*(C) 2008-2021 [QXIP BV](http://qxip.net)*
-
-----------
-
-##### If you use HOMER in production, please consider supporting the project with a [Donation](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=donation%40sipcapture%2eorg&lc=US&item_name=SIPCAPTURE&no_note=0&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHostedGuest)
-
-[![Donate](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=donation%40sipcapture%2eorg&lc=US&item_name=SIPCAPTURE&no_note=0&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHostedGuest)
