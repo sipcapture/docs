@@ -308,11 +308,11 @@ Once configured and enabled, the module will begin forwarding all handled SIP pa
 
 ----------
 
-# RTCP statistics
+### RTCP statistics
 
 Asterisk 12+ ships with _res_hep_rtcp_. The module subscribes to Stasis and receives RTCP information back from the message bus, which it encodes into HEPv3 packets and sends to the res_hep module for transmission. Using this module, someone with a Homer server can get live call quality monitoring for all channels in their Asterisk 12+ systems.
 
-## Enable
+#### Enable
 To enable the functionality, just load the module alongside the [[res_hep|Examples:-Asterisk]] module
 
 ------------
@@ -325,12 +325,12 @@ The module supports sender (SR) and receiver (RR) reports:
 
 -------------
 
-# PJSIP X-CID Correlation for BLEG
+### PJSIP X-CID Correlation for BLEG
 ```
 PJSIP_HEADER(add,X-CID)=$SIPCALLID
 ```
 
-# CDR Correlation Example
+### CDR Correlation Example
 
 ##### /etc/asterisk/extensions.conf
 ```
