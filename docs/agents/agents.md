@@ -1,7 +1,7 @@
-## 📞 Capture Agents
-Ready to ship data to Homer? Install a HEP Capture Agent based on your needs and preferences:
+# __HEP__ Agents
+Ready to ship data to Homer? Install a HEP Capture Agent based on your needs and preferences 📞 
 
-* **Dedicated Agents**:
+### **Dedicated Agents**
 
 HOMER features dedicated _HEP Agents_ designed for platforms _without native HEP support._
 <!-- tabs:start -->
@@ -17,7 +17,7 @@ HOMER features dedicated _HEP Agents_ designed for platforms _without native HEP
 <!-- tabs:end -->
  
  
-* **Native Agents**:
+### **Native Agents**:
   [Native HEP Agents](https://github.com/sipcapture/homer/wiki) are available in [OpenSIPS](https://github.com/sipcapture/homer/wiki/Examples%3A-OpenSIPS), [Kamailio](https://github.com/sipcapture/homer/wiki/Examples%3A-Kamailio), [Asterisk](https://github.com/sipcapture/homer/wiki/Examples%3A-Asterisk), [Freeswitch](https://github.com/sipcapture/homer/wiki/Examples%3A-FreeSwitch), [RTP:Engine](https://github.com/sipcapture/homer/wiki/Examples%3A-RTPEngine) and many more. Consult the Wiki to get specific examples for your platform.
 
 <!-- tabs:start -->
@@ -36,7 +36,7 @@ HOMER features dedicated _HEP Agents_ designed for platforms _without native HEP
 
 <!-- tabs:end -->
 
-* **Event Agents**:
+### **Event Agents**:
 HOMER can collect, index and correlate non-packet events such as Logs, RTC stats, CDRs, and more using [HEP](https://github.com/sipcapture/hep) supported by a variety of tools such as [paStash](https://github.com/sipcapture/pastash/wiki) and [Telegraf](https://github.com/influxdata/telegraf/pull/6167)
 
 <!-- tabs:start -->
@@ -44,7 +44,6 @@ HOMER can collect, index and correlate non-packet events such as Logs, RTC stats
 ## ** paStash **
 
 ## ** telegraf **
-
 
 <!-- tabs:end -->
 
