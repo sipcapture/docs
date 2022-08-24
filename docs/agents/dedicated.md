@@ -1,4 +1,4 @@
-# __HEP__ Agents
+# Dedicated __HEP__ Agents
 
 HOMER features dedicated _HEP Agents_ designed for platforms _without native HEP support._
 
