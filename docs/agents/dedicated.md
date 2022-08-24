@@ -1,6 +1,9 @@
 ### **Dedicated Agents**
 
 HOMER features dedicated _HEP Agents_ designed for platforms _without native HEP support._
+
+?> Using _OpenSIPS, Kamailio, Freeswitch, Asterisk_ or any other **HEP** enabled platform? Proceed [here](/agents/native.md)
+
 <!-- tabs:start -->
 
 ## ** HEPlify **
