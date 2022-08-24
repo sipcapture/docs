@@ -1,4 +1,5 @@
-### **Event Agents**
+# Event __HEP__ Agents
+
 HOMER can collect, index and correlate non-packet events such as Logs, RTC stats, CDRs, and more using [HEP](https://github.com/sipcapture/hep) supported by a variety of tools such as [paStash](https://github.com/sipcapture/pastash/wiki) and [Telegraf](https://github.com/influxdata/telegraf/pull/6167)
 
 <!-- tabs:start -->
