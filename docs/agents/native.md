@@ -269,8 +269,7 @@ If you test or extend this feature please share your feedback!
 
 ## ** Asterisk **
 
-# ![](http://www.asterisk.org/sites/asterisk/themes/asterisk/logo.png)
-
+![](http://www.asterisk.org/sites/asterisk/themes/asterisk/logo.png ':size=100')
 
 Asterisk 12+ ships with HEP encapsulation support (res_hep) and is able to natively mirror its packets to a HEP/EEP Collector such as HOMER. When using ```chan_pjsip``` enabling HEP features is as simple as configuring ```/etc/asterisk/hep.conf```
 
@@ -419,7 +418,7 @@ HOMER_ID=2099
 
 ### ** RTPProxy **
 
-<img src="https://opengraph.githubassets.com/96bbc25bfaf9f9c4228742862d8d672f90113dc54d064cfbc593e4154b393a21/sippy/rtpproxy" width=600 />
+<img src="https://opengraph.githubassets.com/96bbc25bfaf9f9c4228742862d8d672f90113dc54d064cfbc593e4154b393a21/sippy/rtpproxy" width=300 />
 
 #### HEP Support
 [RTPProxy](https://www.rtpproxy.org/) can natively send HEP RTCP Reports _(HEP type 5)_ for relayed RTP/RTCP streams
