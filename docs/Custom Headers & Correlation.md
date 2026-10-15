@@ -146,7 +146,7 @@ Fields can be modified and extended using the `input_function_js` functionality.
         "lookup_id": 1,
         "lookup_profile": "call",
         "lookup_field": "sid",
-        "input_function_js": "var returnData=[]; for (var i = 0; i < data.length; i++) { returnData.push(data[i]+'_b2b-1'); }; returnData;"
+        "input_function_js": "var returnData=[]; for (var i = 0; i < data.length; i++) { returnData.push(data[i]+'_b2b-1'); }; returnData;",
         "lookup_range": [
             -300,
             200
@@ -164,7 +164,7 @@ Or multiple prefixes and suffixes `SBC-` , `_PBX-1`
         "lookup_id": 1,
         "lookup_profile": "call",
         "lookup_field": "sid",
-        "input_function_js": "var returnData=[]; for (var i = 0; i < data.length; i++) { returnData.push('SBC-'+data[i]); returnData.push(data[i]+'_PBX-1'); }; returnData;"
+        "input_function_js": "var returnData=[]; for (var i = 0; i < data.length; i++) { returnData.push('SBC-'+data[i]); returnData.push(data[i]+'_PBX-1'); }; returnData;",
         "lookup_range": [
             -300,
             200

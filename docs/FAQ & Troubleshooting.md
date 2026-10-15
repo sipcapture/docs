@@ -1,21 +1,11 @@
 [![HOMER](https://camo.githubusercontent.com/c287bf83f8d5969635b5bed047a3e70854bc1840/687474703a2f2f736970636170747572652e6f72672f646174612f696d616765732f736970636170747572655f6865616465722e706e67)](http://sipcapture.org)
 
 <p align="center">
-
-<br>
-
-<!--
-
 <b>FREQUENTLY ASKED QUESTIONS</b>
-
 <br><br>
-
-Having issues setting up or using Homer SIP Capture? No Problem! 
-<br>
-Most likely someone raised and solved the same issue before - Enter <b>HOMER'S F.A.Q.</b>
-
+Having issues setting up or using Homer SIP Capture? No problem —
+most likely someone raised and solved the same issue before.
 </p>
-
 
 ----
 

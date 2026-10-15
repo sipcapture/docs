@@ -161,7 +161,7 @@ To compile and enable TLS decryption features, please check the dedicated Wiki p
 
 Congratulations! You just installed your first basic instance of CaptAgent 6!
   
-#### Next: [Configure CaptAgent 6](https://github.com/sipcapture/captagent/wiki/Configuration)
+#### Next: [Configure CaptAgent 6](#captagent-configuration)
 
 
 # Captagent Init Scripts
@@ -224,7 +224,7 @@ This section provides guidance to configure Captagent and its core modules on yo
 
 #### Configuration Logic
 
-Understanding of CaptAgent configuration structure is key - read [this](https://github.com/sipcapture/captagent/wiki/About#sockets-pipes-and-plans) section carefully!
+Understanding of CaptAgent configuration structure is key - read [this](#internal-architecture) section carefully!
 
 
 -------------
@@ -283,15 +283,15 @@ To begin, edit and validate the configuration and the module paths in ```/usr/lo
 
 ### Next:
 
-* Configure [Socket Modules](https://github.com/sipcapture/captagent/wiki/Socket-Modules)
-* Configure [Transport Modules](https://github.com/sipcapture/captagent/wiki/Transport-Modules)
-* Configure [Capture Plans](https://github.com/sipcapture/captagent/wiki/Capture-Plans)
+* Configure [Socket Modules](#socket-modules)
+* Configure [Transport Modules](#transport-modules)
+* Configure [Capture Plans](#capture-plans)
 
 ### Socket Modules
 Socket modules are used by captagent to capture packets from the system available interfaces. By default, the ```pcap``` socket is enabled.
 
 #### PCAP Socket
-Within each socket, multiple profiles can be defined and configured as pipelines to process captured packets. By default the ```socketspcap_sip``` pipeline is enabled defining the interface and ports utilized for capturing and processing ```SIP``` packets via the dedicated [Capture Plan](https://github.com/sipcapture/captagent/wiki/Capture-Plans)
+Within each socket, multiple profiles can be defined and configured as pipelines to process captured packets. By default the ```socketspcap_sip``` pipeline is enabled defining the interface and ports utilized for capturing and processing ```SIP``` packets via the dedicated [Capture Plan](#capture-plans)
 
 ```
       <profile name="socketspcap_sip" description="HEP Socket" enable="true" serial="2014010402">

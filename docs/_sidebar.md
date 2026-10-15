@@ -13,4 +13,8 @@
     * [Native Agents](agents/native.md "HOMER VoIP & RTC Monitoring")
     * [Event Agents](agents/event.md "HOMER VoIP & RTC Monitoring")
 * [Support](support.md)
-
+* **Wiki mirror**
+  * [Index](wiki-index.md)
+  * [CaptAgent](captagent.md)
+  * [Heplify](heplify_installation_usage.md)
+  * [RTCagent](rtcagent_installation_usage.md)
