@@ -4,3 +4,7 @@
 ## [Official Documentation](https://sipcapture.github.io/docs/) for [HOMER](https://github.com/sipcapture/homer)
 
 <img src="https://user-images.githubusercontent.com/1423657/73536888-5513dd80-4427-11ea-82aa-b2ce53192a63.png"/>
+
+### Wiki mirror (Markdown)
+
+Historical Homer wiki and component README content is also available as Markdown under [`docs/`](docs/). Start at [docs/wiki-index.md](docs/wiki-index.md) for the full list (homer-app, heplify, captagent, rtcagent, and Homer wiki pages).
